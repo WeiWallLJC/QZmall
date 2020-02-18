@@ -1,0 +1,89 @@
+package new_qingzhu.demo.Pojo;
+
+import java.util.Date;
+
+public class TQingzhuShoppingCartItem {
+    private Long cartItemId;
+
+    private Long userId;
+
+    private Long goodsId;
+
+    private Integer goodsCount;
+
+    private Byte isDeleted;
+
+    private Date createTime;
+
+    private Date updateTime;
+
+    public TQingzhuShoppingCartItem(Long cartItemId, Long userId, Long goodsId, Integer goodsCount, Byte isDeleted, Date createTime, Date updateTime) {
+        this.cartItemId = cartItemId;
+        this.userId = userId;
+        this.goodsId = goodsId;
+        this.goodsCount = goodsCount;
+        this.isDeleted = isDeleted;
+        this.createTime = createTime;
+        this.updateTime = updateTime;
+    }
+
+    public TQingzhuShoppingCartItem() {
+        super();
+    }
+
+    public Long getCartItemId() {
+        return cartItemId;
+    }
+
+    public void setCartItemId(Long cartItemId) {
+        this.cartItemId = cartItemId;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public Long getGoodsId() {
+        return goodsId;
+    }
+
+    public void setGoodsId(Long goodsId) {
+        this.goodsId = goodsId;
+    }
+
+    public Integer getGoodsCount() {
+        return goodsCount;
+    }
+
+    public void setGoodsCount(Integer goodsCount) {
+        this.goodsCount = goodsCount;
+    }
+
+    public Byte getIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(Byte isDeleted) {
+        this.isDeleted = isDeleted;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+}

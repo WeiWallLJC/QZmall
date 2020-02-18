@@ -1,0 +1,474 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="new_qingzhu.demo.Mapper.TQingzhuGoodsInfoMapper">
+  <resultMap id="BaseResultMap" type="new_qingzhu.demo.Pojo.TQingzhuGoodsInfo">
+    <constructor>
+      <idArg column="goods_id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="goods_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="goods_intro" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="goods_category_id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="goods_cover_img" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="goods_carousel" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="original_price" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="selling_price" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="stock_num" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="tag" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="goods_sell_status" javaType="java.lang.Byte" jdbcType="TINYINT" />
+      <arg column="create_user" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="update_user" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="update_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+    </constructor>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="new_qingzhu.demo.Pojo.TQingzhuGoodsInfo">
+    <constructor>
+      <idArg column="goods_id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="goods_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="goods_intro" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="goods_category_id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="goods_cover_img" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="goods_carousel" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="original_price" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="selling_price" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="stock_num" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="tag" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="goods_sell_status" javaType="java.lang.Byte" jdbcType="TINYINT" />
+      <arg column="create_user" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="update_user" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="update_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="goods_detail_content" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    goods_id, goods_name, goods_intro, goods_category_id, goods_cover_img, goods_carousel, 
+    original_price, selling_price, stock_num, tag, goods_sell_status, create_user, create_time, 
+    update_user, update_time
+  </sql>
+  <sql id="Blob_Column_List">
+    goods_detail_content
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="new_qingzhu.demo.Pojo.TQingzhuGoodsInfoExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_qingzhu_goods_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="new_qingzhu.demo.Pojo.TQingzhuGoodsInfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_qingzhu_goods_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_qingzhu_goods_info
+    where goods_id = #{goodsId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_qingzhu_goods_info
+    where goods_id = #{goodsId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="new_qingzhu.demo.Pojo.TQingzhuGoodsInfoExample">
+    delete from t_qingzhu_goods_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="new_qingzhu.demo.Pojo.TQingzhuGoodsInfo">
+    <selectKey keyProperty="goodsId" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_qingzhu_goods_info (goods_name, goods_intro, goods_category_id, 
+      goods_cover_img, goods_carousel, original_price, 
+      selling_price, stock_num, tag, 
+      goods_sell_status, create_user, create_time, 
+      update_user, update_time, goods_detail_content
+      )
+    values (#{goodsName,jdbcType=VARCHAR}, #{goodsIntro,jdbcType=VARCHAR}, #{goodsCategoryId,jdbcType=BIGINT}, 
+      #{goodsCoverImg,jdbcType=VARCHAR}, #{goodsCarousel,jdbcType=VARCHAR}, #{originalPrice,jdbcType=INTEGER}, 
+      #{sellingPrice,jdbcType=INTEGER}, #{stockNum,jdbcType=INTEGER}, #{tag,jdbcType=VARCHAR}, 
+      #{goodsSellStatus,jdbcType=TINYINT}, #{createUser,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateUser,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, #{goodsDetailContent,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="new_qingzhu.demo.Pojo.TQingzhuGoodsInfo">
+    <selectKey keyProperty="goodsId" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_qingzhu_goods_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="goodsName != null">
+        goods_name,
+      </if>
+      <if test="goodsIntro != null">
+        goods_intro,
+      </if>
+      <if test="goodsCategoryId != null">
+        goods_category_id,
+      </if>
+      <if test="goodsCoverImg != null">
+        goods_cover_img,
+      </if>
+      <if test="goodsCarousel != null">
+        goods_carousel,
+      </if>
+      <if test="originalPrice != null">
+        original_price,
+      </if>
+      <if test="sellingPrice != null">
+        selling_price,
+      </if>
+      <if test="stockNum != null">
+        stock_num,
+      </if>
+      <if test="tag != null">
+        tag,
+      </if>
+      <if test="goodsSellStatus != null">
+        goods_sell_status,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateUser != null">
+        update_user,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="goodsDetailContent != null">
+        goods_detail_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="goodsName != null">
+        #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsIntro != null">
+        #{goodsIntro,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsCategoryId != null">
+        #{goodsCategoryId,jdbcType=BIGINT},
+      </if>
+      <if test="goodsCoverImg != null">
+        #{goodsCoverImg,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsCarousel != null">
+        #{goodsCarousel,jdbcType=VARCHAR},
+      </if>
+      <if test="originalPrice != null">
+        #{originalPrice,jdbcType=INTEGER},
+      </if>
+      <if test="sellingPrice != null">
+        #{sellingPrice,jdbcType=INTEGER},
+      </if>
+      <if test="stockNum != null">
+        #{stockNum,jdbcType=INTEGER},
+      </if>
+      <if test="tag != null">
+        #{tag,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsSellStatus != null">
+        #{goodsSellStatus,jdbcType=TINYINT},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        #{updateUser,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="goodsDetailContent != null">
+        #{goodsDetailContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="new_qingzhu.demo.Pojo.TQingzhuGoodsInfoExample" resultType="java.lang.Long">
+    select count(*) from t_qingzhu_goods_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_qingzhu_goods_info
+    <set>
+      <if test="record.goodsId != null">
+        goods_id = #{record.goodsId,jdbcType=BIGINT},
+      </if>
+      <if test="record.goodsName != null">
+        goods_name = #{record.goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsIntro != null">
+        goods_intro = #{record.goodsIntro,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsCategoryId != null">
+        goods_category_id = #{record.goodsCategoryId,jdbcType=BIGINT},
+      </if>
+      <if test="record.goodsCoverImg != null">
+        goods_cover_img = #{record.goodsCoverImg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsCarousel != null">
+        goods_carousel = #{record.goodsCarousel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.originalPrice != null">
+        original_price = #{record.originalPrice,jdbcType=INTEGER},
+      </if>
+      <if test="record.sellingPrice != null">
+        selling_price = #{record.sellingPrice,jdbcType=INTEGER},
+      </if>
+      <if test="record.stockNum != null">
+        stock_num = #{record.stockNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.tag != null">
+        tag = #{record.tag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsSellStatus != null">
+        goods_sell_status = #{record.goodsSellStatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.createUser != null">
+        create_user = #{record.createUser,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateUser != null">
+        update_user = #{record.updateUser,jdbcType=INTEGER},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.goodsDetailContent != null">
+        goods_detail_content = #{record.goodsDetailContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update t_qingzhu_goods_info
+    set goods_id = #{record.goodsId,jdbcType=BIGINT},
+      goods_name = #{record.goodsName,jdbcType=VARCHAR},
+      goods_intro = #{record.goodsIntro,jdbcType=VARCHAR},
+      goods_category_id = #{record.goodsCategoryId,jdbcType=BIGINT},
+      goods_cover_img = #{record.goodsCoverImg,jdbcType=VARCHAR},
+      goods_carousel = #{record.goodsCarousel,jdbcType=VARCHAR},
+      original_price = #{record.originalPrice,jdbcType=INTEGER},
+      selling_price = #{record.sellingPrice,jdbcType=INTEGER},
+      stock_num = #{record.stockNum,jdbcType=INTEGER},
+      tag = #{record.tag,jdbcType=VARCHAR},
+      goods_sell_status = #{record.goodsSellStatus,jdbcType=TINYINT},
+      create_user = #{record.createUser,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_user = #{record.updateUser,jdbcType=INTEGER},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      goods_detail_content = #{record.goodsDetailContent,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_qingzhu_goods_info
+    set goods_id = #{record.goodsId,jdbcType=BIGINT},
+      goods_name = #{record.goodsName,jdbcType=VARCHAR},
+      goods_intro = #{record.goodsIntro,jdbcType=VARCHAR},
+      goods_category_id = #{record.goodsCategoryId,jdbcType=BIGINT},
+      goods_cover_img = #{record.goodsCoverImg,jdbcType=VARCHAR},
+      goods_carousel = #{record.goodsCarousel,jdbcType=VARCHAR},
+      original_price = #{record.originalPrice,jdbcType=INTEGER},
+      selling_price = #{record.sellingPrice,jdbcType=INTEGER},
+      stock_num = #{record.stockNum,jdbcType=INTEGER},
+      tag = #{record.tag,jdbcType=VARCHAR},
+      goods_sell_status = #{record.goodsSellStatus,jdbcType=TINYINT},
+      create_user = #{record.createUser,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_user = #{record.updateUser,jdbcType=INTEGER},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="new_qingzhu.demo.Pojo.TQingzhuGoodsInfo">
+    update t_qingzhu_goods_info
+    <set>
+      <if test="goodsName != null">
+        goods_name = #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsIntro != null">
+        goods_intro = #{goodsIntro,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsCategoryId != null">
+        goods_category_id = #{goodsCategoryId,jdbcType=BIGINT},
+      </if>
+      <if test="goodsCoverImg != null">
+        goods_cover_img = #{goodsCoverImg,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsCarousel != null">
+        goods_carousel = #{goodsCarousel,jdbcType=VARCHAR},
+      </if>
+      <if test="originalPrice != null">
+        original_price = #{originalPrice,jdbcType=INTEGER},
+      </if>
+      <if test="sellingPrice != null">
+        selling_price = #{sellingPrice,jdbcType=INTEGER},
+      </if>
+      <if test="stockNum != null">
+        stock_num = #{stockNum,jdbcType=INTEGER},
+      </if>
+      <if test="tag != null">
+        tag = #{tag,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsSellStatus != null">
+        goods_sell_status = #{goodsSellStatus,jdbcType=TINYINT},
+      </if>
+      <if test="createUser != null">
+        create_user = #{createUser,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        update_user = #{updateUser,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="goodsDetailContent != null">
+        goods_detail_content = #{goodsDetailContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where goods_id = #{goodsId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="new_qingzhu.demo.Pojo.TQingzhuGoodsInfo">
+    update t_qingzhu_goods_info
+    set goods_name = #{goodsName,jdbcType=VARCHAR},
+      goods_intro = #{goodsIntro,jdbcType=VARCHAR},
+      goods_category_id = #{goodsCategoryId,jdbcType=BIGINT},
+      goods_cover_img = #{goodsCoverImg,jdbcType=VARCHAR},
+      goods_carousel = #{goodsCarousel,jdbcType=VARCHAR},
+      original_price = #{originalPrice,jdbcType=INTEGER},
+      selling_price = #{sellingPrice,jdbcType=INTEGER},
+      stock_num = #{stockNum,jdbcType=INTEGER},
+      tag = #{tag,jdbcType=VARCHAR},
+      goods_sell_status = #{goodsSellStatus,jdbcType=TINYINT},
+      create_user = #{createUser,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      goods_detail_content = #{goodsDetailContent,jdbcType=LONGVARCHAR}
+    where goods_id = #{goodsId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="new_qingzhu.demo.Pojo.TQingzhuGoodsInfo">
+    update t_qingzhu_goods_info
+    set goods_name = #{goodsName,jdbcType=VARCHAR},
+      goods_intro = #{goodsIntro,jdbcType=VARCHAR},
+      goods_category_id = #{goodsCategoryId,jdbcType=BIGINT},
+      goods_cover_img = #{goodsCoverImg,jdbcType=VARCHAR},
+      goods_carousel = #{goodsCarousel,jdbcType=VARCHAR},
+      original_price = #{originalPrice,jdbcType=INTEGER},
+      selling_price = #{sellingPrice,jdbcType=INTEGER},
+      stock_num = #{stockNum,jdbcType=INTEGER},
+      tag = #{tag,jdbcType=VARCHAR},
+      goods_sell_status = #{goodsSellStatus,jdbcType=TINYINT},
+      create_user = #{createUser,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where goods_id = #{goodsId,jdbcType=BIGINT}
+  </update>
+  <update id="updateStockNum">
+    <foreach collection="stockNumDTOS" item="stockNumDTO">
+      update t_qingzhu_goods_info
+      set stock_num = stock_num-#{stockNumDTO.goodsCount}
+      where goods_id = #{stockNumDTO.goodsId} and stock_num>=#{stockNumDTO.goodsCount} and goods_sell_status = 0;
+    </foreach>
+  </update>
+</mapper>

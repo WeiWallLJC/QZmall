@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head-fragment(title,path)">
+    <meta charset="UTF-8">
+    <title th:text="${title}">青竹商城</title>
+    <link rel="stylesheet" th:href="@{/mall/css/swiper.min.css}">
+    <link rel="stylesheet" th:href="@{/mall/css/iconfont.css}">
+    <link rel="stylesheet" th:href="@{/mall/css/common.css}">
+    <link rel="stylesheet" th:href="@{/mall/styles/header.css}">
+    <link rel="stylesheet" th:href="@{'/mall/styles/'+${path}+'.css'}">
+    <link rel="stylesheet" th:href="@{/admin/plugins/sweetalert/sweetalert.css}"/>
+</head>
+<nav id="nav" th:fragment="nav-fragment">
+    <div class="banner_x center">
+        <div class="header" style="width: 100%;
+	height: 68px;
+	border-bottom: 1px solid #E1E1E1;
+	font-size: 14px;
+	color: #333333;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background: #fff;
+	z-index: 999;">
+            <div class="header_c inner_c" style="	/* 版心的宽度 */
+	width: 1140px;
+		height: 68px;
+	/* 居中显示 */
+	margin: 0 auto;">
+                <h1 class="logo" style="	width: 200px;
+	height: 68px;
+	background: url(mall/images/logo.png)no-repeat 22px 15px;
+	text-indent: -999em;
+	overflow: hidden;
+	float: left;">
+                    青竹商城
+                </h1>
+                <dl class = "allType" style="	float: left;
+	line-height: 68px;">
+                    <dt style="	width: 120px;
+	height: 68px;
+	text-align: center;"><a href="#">查看所有类型</a></dt>
+                </dl>
+                <ul class="nav" style="	float: left;
+	line-height: 68px;">
+                    <li style="	float: left;
+	padding: 0 28px;"><a href="index.html" th:href="@{/index}">首页</a></li>
+                    <li style="	float: left;
+	padding: 0 28px;"><a href="search.html" th:href="@{/search}">所有产品</a></li>
+                </ul>
+                <div class="fr" style="float: right">
+                    <div class="search">
+                        <input class="text" type="text" id="keyword" autocomplete="off">
+                        <div class="search_hot">
+                        </div>
+                    </div>
+                    <div class="button iconfont icon-search" onclick="search()"></div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</nav>
+<header id="header" th:fragment="header-fragment">
+    <div class="center">
+        <ul class="fl">
+            <li><a th:href="@{/index}">青竹商城</a></li>
+            <li><a th:href="@{/admin}">后台管理系统</a></li>
+        </ul>
+        <div class="fr">
+            <th:block th:unless="${session.newBeeMallUser==null}">
+                <div class="user">
+                    <ul class="selector">
+                        <li>
+                            <a th:href="@{/personal}">
+                                个人中心
+                            </a>
+                        </li>
+                        <li>
+                            <a th:href="@{/orders}">
+                                我的订单
+                            </a>
+                        </li>
+                        <li>
+                            <a th:href="@{/logout}">
+                                退出登录
+                            </a>
+                        </li>
+                    </ul>
+                    <a href="##" class="username">
+                        <th:block th:text="${session.newBeeMallUser.nickName}"></th:block>
+                        <i class="iconfont icon-down"></i>
+                    </a>
+                </div>
+                <div class="shopcart">
+                    <a th:href="@{/shop-cart}" style="color: white;"><i class="iconfont icon-cart"></i>
+                        购物车(
+                        <th:block th:text="${session.newBeeMallUser.shopCartItemCount}"></th:block>
+                        )</a>
+                </div>
+            </th:block>
+            <th:block th:if="${session.newBeeMallUser==null}">
+                <ul class="login">
+                    <li><a th:href="@{/login}">登录</a></li>
+                    <li><a th:href="@{/register}">注册</a></li>
+                </ul>
+                <div class="shopcart">
+                    <a href="##" style="color: white;"><i class="iconfont icon-cart"></i>
+                        购物车(0)</a>
+                </div>
+            </th:block>
+        </div>
+    </div>
+</header>
+</html>
